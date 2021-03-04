@@ -18,11 +18,12 @@ package com.example.androiddevchallenge
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.androiddevchallenge.data.Friend
+import com.example.androiddevchallenge.data.createFriendsList
+import com.example.androiddevchallenge.ui.AdoptAFriend
 import com.example.androiddevchallenge.ui.theme.MyTheme
 
 class MainActivity : AppCompatActivity() {
@@ -30,17 +31,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyTheme {
-                MyApp()
+                AdoptAFriend(darkTheme = isSystemInDarkTheme())
             }
         }
     }
-}
 
-// Start building your app here!
-@Composable
-fun MyApp() {
-    Surface(color = MaterialTheme.colors.background) {
-        Text(text = "Ready... Set... GO!")
+    companion object {
+        val listOfFriends: List<Friend> = createFriendsList()
     }
 }
 
@@ -48,14 +45,14 @@ fun MyApp() {
 @Composable
 fun LightPreview() {
     MyTheme {
-        MyApp()
+        AdoptAFriend(darkTheme = isSystemInDarkTheme())
     }
 }
 
 @Preview("Dark Theme", widthDp = 360, heightDp = 640)
 @Composable
 fun DarkPreview() {
-    MyTheme(darkTheme = true) {
-        MyApp()
+    MyTheme {
+        AdoptAFriend(darkTheme = isSystemInDarkTheme())
     }
 }
